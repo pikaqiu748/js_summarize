@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      width: 200px;
+    }
+  </style>
+</head>
+<!-- 防抖，执行最后一次 -->
+<body>
+  <input type="password"></input>
+  <script>
+    let inp = document.querySelector("input")
+    let t = null
+    inp.oninput = function () {
+      if (t != null) {
+        clearTimeout(t)
+      }
+      t = setTimeout(() => {
+        console.log(this.value)
+      }, 500)
+    }
+  </script>
+</body>
+
+</html>

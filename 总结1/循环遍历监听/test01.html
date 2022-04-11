@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>111</button>
+  <button>222</button>
+  <button>333</button>
+
+  <script>
+    var btns = document.getElementsByTagName('button')
+
+    //ES5第一种方法,index标记i
+    /*for (var i = 0; i < btns.length; i++) {
+      let btn = btns[i]
+      btn.index = i
+      btn.onclick = function () {
+        console.log(this.index)
+      }
+    }*/
+    //第二种,闭包
+    for (var i = 0, length = btns.length; i < length; i++) {
+      (function (i) {
+        var btn = btns[i]
+        btn.onclick = function () {
+          console.log(i)
+        }
+      })(i)
+    }
+    //第三种，ES6使用let定义i
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      outline: 2px solid;
+      margin: 5px;
+    }
+
+    /* 以下为整个页面的布局 */
+    .main {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .top,
+    .footer {
+      height: 50px;
+    }
+
+    /* 以下为中间的body布局 */
+    .body {
+      flex: 1;
+      display: flex;
+    }
+
+    .body-main {
+      flex: 1;
+      background-color: yellow;
+    }
+
+    .body-left,
+    .body-right {
+      width: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="top">标题栏</div>
+    <div class="body">
+      <div class="body-left">左边导航栏</div>
+      <div class="body-main">主内容，自动伸缩</div>
+      <div class="body-right">右边提示栏</div>
+    </div>
+    <div class="footer">页脚栏，使用flex布局</div>
+  </div>
+</body>
+
+</html>

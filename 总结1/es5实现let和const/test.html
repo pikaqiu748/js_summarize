@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 2. 挂载到window上面
+    function getConst2 (constKey, constVal) {
+      window[constKey] = constVal;
+      Object.defineProperty(window, constKey, {
+        get: function () {   //如果设置了 set 或 get, 就不能设置 writable 和 value 中的任何一个，否则报错
+          return constVal;
+        },
+        enumerable: true, //是否可枚举
+        configurable: false,  //是否可修改当前描述的配置信息
+      })
+    }
+
+    getConst2('b', 30);
+    getConst2('c', 50);
+    console.log(window.b);    //30
+    console.log(window.c);    //50
+    window.b = 66
+    console.log(window.b);    //30
+    console.log('b')
+
+
+  </script>
+</body>
+
+</html>

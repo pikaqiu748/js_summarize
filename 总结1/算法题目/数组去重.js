@@ -1,0 +1,1 @@
+console.log(typeof [...new Set([1,2,3,3,3,4,5,56,6,6])])

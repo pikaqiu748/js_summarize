@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function haha () {
+      function test () {
+        console.log(haha.caller)   //没有函数调用haha,所以haha的调用函数为null;
+        console.log(test.caller)  //haha调用test,所以test的caller为haha函数
+        console.log(arguments.callee) //test正在被执行.
+      }
+      test(1, 2, 3);
+    }
+
+    haha();
+  </script>
+</body>
+
+</html>

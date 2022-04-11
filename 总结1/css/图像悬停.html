@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+      min-height: 100vh;
+    }
+
+    .loader {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background: rgb(24, 23, 23);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loader span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 2px solid #fff;
+      pointer-events: none;
+      animation: animate 5s linear infinite;
+    }
+
+    .loader span:nth-child(1) {
+      animation-direction: reverse;
+      border-radius: 67% 33% 44% 56% / 50% 30% 70% 50%;
+    }
+
+    .loader span:nth-child(2) {
+      animation-direction: reverse;
+      border-radius: 47% 53% 46% 54% / 42% 71% 29% 58%;
+    }
+
+    .loader span:nth-child(3) {
+      animation-duration: 3s;
+      border-radius: 68% 32% 75% 25% / 37% 61% 39% 63%;
+    }
+
+    @keyframes animate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg)
+      }
+
+    }
+
+    .loader h2 {
+      font-weight: 500;
+      color: #fff;
+      font-family: consolas;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loader">
+    <span></span>
+    <span></span>
+    <span></span>
+    <h2>Loading...</h2>
+  </div>
+</body>
+
+</html>

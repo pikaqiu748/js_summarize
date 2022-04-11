@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var name = 'tom'
+    var c = {
+      name: 'li',
+      getName: function () {
+        console.log(this)   //c{}
+        const that = this   //that保存this，形成闭包
+        return function () {
+          //that 构成闭包
+          console.log(this)   //window
+          console.log(that.name)
+        }
+      }
+    }
+
+    c.getName()()  //li
+
+    function test01() {
+      return function () {
+        console.log(this)
+      }
+    }
+
+    test01()()
+  </script>
+</body>
+
+</html>

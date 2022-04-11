@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>display属性显示隐藏轮播图1</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #wrapper {
+      position: relative;
+      margin: 50px auto;
+      padding: 0;
+      width: 500px;
+      height: 300px;
+    }
+
+    #wrapper .content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #wrapper>.content>.imgs {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      list-style: none;
+    }
+
+    #wrapper>.content>.imgs li {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #wrapper>.content>.imgs>li img {
+      width: 100%;
+      height: 100%;
+    }
+
+    #wrapper>.content>.dots {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      list-style: none;
+    }
+
+    #wrapper>.content>.dots li {
+      float: left;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
+      border-radius: 50%;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    li.active {
+      background-color: white;
+    }
+
+    li.quiet {
+      background-color: #5a5a58;
+    }
+
+    .btns {
+      display: none;
+    }
+
+    .btns span {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      top: 50%;
+      margin-top: -20px;
+      line-height: 40px;
+      text-align: center;
+      font-weight: bold;
+      font-family: Simsun;
+      font-size: 30px;
+      border: 1px solid #fff;
+      opacity: 0.5;
+      cursor: pointer;
+      color: #fff;
+      background: black;
+    }
+
+    .btns .left {
+      left: 5px;
+    }
+
+    .btns .right {
+      left: 100%;
+      margin-left: -45px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="content">
+      <ul class="imgs">
+        <li><img class="img" src="images/1.jpg" /></li>
+        <li><img class="img" src="images/2.jpg" /></li>
+        <li><img class="img" src="images/3.jpg" /></li>
+        <li><img class="img" src="images/4.jpg" /></li>
+      </ul>
+      <ul class='dots'></ul>
+    </div>
+    <div class="btns">
+      <span class="left">&lt;</span>
+      <span class="right">&gt;</span>
+    </div>
+  </div>
+  <script>
+    // 滚动索引
+    var index = 0;
+    var imgs = document.getElementsByClassName("img");
+    var dots = document.getElementsByClassName("dots")[0];
+    var btns = document.getElementsByClassName("btns")[0];
+    var dotss = dots.children;
+
+    var len = imgs.length;  //图片张数
+    var timer = null; //定时器
+
+    // 创建一个文档片段，此时还没有插入到 DOM 结构中
+    const frag = document.createDocumentFragment()
+    // 根据图片数量添加相应的小圆点到文档片段中
+    for (let i = 0; i < len; i++) {
+      const dot = document.createElement("li");
+      dot.className = 'quiet';
+      // 先插入文档片段中
+      frag.appendChild(dot);
+    }
+    // 将小圆点片段统一插入到 DOM 结构中
+    dots.appendChild(frag)
+    // 第一个小圆点高亮显示
+    dots.children[0].className = "active";
+
+    //改变图片
+    function ChangeImg() {
+      index++;
+      if (index >= len) index = 0;
+
+      // 循环将全部图片和圆点重置为默认样式
+      for (var i = 0; i < len; i++) {
+        imgs[i].style.display = 'none';
+        dotss[i].className = "quiet";
+      }
+
+      // 将当前图片显示
+      imgs[index].style.display = 'block';
+      // 将当前圆点添加高亮样式
+      dotss[index].className = "active";
+    }
+
+    // 循环添加小圆点的触发事件
+    for (var i = 0; i < len; i++) {
+      dotss[i].index = i;
+      dotss[i].onmouseover = function () {
+        for (var j = 0; j < len; j++) {
+          imgs[j].style.display = 'none';
+          dotss[j].className = "quiet";
+        }
+        this.className = "active";
+        index = this.index;
+        imgs[index].style.display = 'block';
+      }
+    }
+
+    // 添加事件：鼠标移动到wrapper上，左右切换按钮显示
+    wrapper.onmouseover = function () {
+      clearInterval(timer);
+      btns.style.display = 'block';
+    }
+    // 添加事件：鼠标移出wrapper，左右切换按钮隐藏
+    wrapper.onmouseout = function () {
+      timer = setInterval(ChangeImg, 2000);
+      btns.style.display = 'none';
+    }
+
+
+    // 点击上一张按钮 触发事件
+    btns.children[0].onclick = function () {
+      index--;
+      //滚动完第一项后
+      if (index < 0) {
+        index = len - 1;
+      }
+
+      // 循环将全部图片和圆点重置为默认样式
+      for (var i = 0; i < len; i++) {
+        imgs[i].style.display = 'none';
+        dotss[i].className = "quiet";
+      }
+
+      // 将当前图片显示
+      imgs[index].style.display = 'block';
+      // 将当前圆点添加高亮样式
+      dotss[index].className = "active";
+
+    }
+    // 点击下一张按钮 触发事件
+    btns.children[1].onclick = ChangeImg;
+
+    //设置定时器，每隔两秒切换一张图片
+    timer = setInterval(ChangeImg, 2000);
+  </script>
+</body>
+
+</html>

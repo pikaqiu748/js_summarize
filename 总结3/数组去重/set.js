@@ -1,0 +1,1 @@
+console.log(Array.from(new Set([1, 2, 2, 3, 44, 44, 4, 4, 5])))   //还保证了元素的顺序

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var value = 1;
+    Object.defineProperty(window, "a", {
+      get () {
+        return this.value++;
+      },
+    });
+
+
+    if (a === 1 && a === 2 && a === 3) {
+      console.log("hello world!");
+    }
+
+
+    //第二种方式,proxy
+
+    let test = {
+      number: 1
+    };
+    test = new Proxy(test, {
+      get (target, key) {
+        return target[key]++;
+      }
+    });
+    if (test.number === 1 && test.number === 2 && test.number === 3) {
+      console.log('333');
+    }
+
+  </script>
+</body>
+
+</html>

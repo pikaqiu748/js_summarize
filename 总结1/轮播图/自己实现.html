@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #wrapper {
+      position: relative;
+      margin: 50px auto;
+      padding: 0;
+      width: 500px;
+      height: 300px;
+    }
+
+    #wrapper .content {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+
+    #wrapper>.content>.imgs {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      left: 0;
+      top: 0;
+      width: 2500px;
+      list-style: none;
+    }
+
+    .imgs>li {
+      float: left;
+      margin: 0;
+      padding: 0;
+      width: 500px;
+      height: 300px;
+    }
+
+    li>img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .content>.dots {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      list-style: none;
+    }
+
+    .dots li {
+      float: left;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
+      border-radius: 50%;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    li.active {
+      background-color: green;
+    }
+
+    li.quiet {
+      background-color: gray;
+    }
+
+    .btns {
+      display: none;
+    }
+
+    .btns span {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      top: 50%;
+      margin-top: -20px;
+      line-height: 40px;
+      text-align: center;
+      font-weight: bold;
+      font-family: Simsun;
+      font-size: 30px;
+      border: 1px solid #fff;
+      opacity: 0.5;
+      cursor: pointer;
+      color: rgb(103, 245, 9);
+      background: black;
+    }
+
+    .btns .left {
+      left: 5px;
+    }
+
+    .btns .right {
+      left: 100%;
+      margin-left: -45px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='wrapper'>
+    <div class="content">
+      <ul class="imgs">
+        <li>
+          <img src="images/1.jpg">
+        </li>
+        <li>
+          <img src="images/2.jpg">
+        </li>
+        <li>
+          <img src="images/3.jpg">
+        </li>
+        <li>
+          <img src="images/4.jpg">
+        </li>
+      </ul>
+      <ul class="dots"></ul>
+    </div>
+    <div class="btns">
+      <span class="left">&lt;</span>
+      <span class="right">&gt;</span>
+    </div>
+  </div>
+</body>
+
+<script>
+  var wrapper = document.getElementById('wrapper')
+  var imgs = document.getElementsByClassName("imgs")[0]
+  var len = imgs.children.length
+
+  var dots = document.getElementsByClassName('dots')[0]
+  var dotsChildren = dots.children
+
+  var btns = document.getElementsByClassName('btns')[0]
+
+  //图片的宽度,offsetLeft没有px单位
+  var imgWidth = wrapper.offsetWidth
+  console.log(imgWidth)
+  //当前图片的dot
+  var dotActive = 0
+  //当前图片
+  var imgActive = 0
+  //记录当前显示的索引
+  var temp;
+  //切换倍率
+  var times = 1
+  //单位时间切换的px距离
+  var rate = 15
+  //每2秒切换一次
+  var gapTime = 2000
+  //初始化定时器
+  var timer = null
+
+  const frag = document.createDocumentFragment()
+  for (let i = 0; i < len; i++) {
+    const dot = document.createElement("li")
+    dot.className = "quiet"
+    frag.appendChild(dot)
+  }
+  dots.appendChild(frag)
+  dots.children[0].className = 'active'
+  //给每个dot添加事件
+  for (let i = 0; i < len; i++) {
+    dotsChildren[i].index = i
+    dotsChildren[i].onmouseover = function () {
+      for (let j = 0; j < len; j++) {
+        dotsChildren[j].className = "quiet"
+      }
+      this.className = "active"
+      temp = dotActive
+      imgActive = dotActive = this.index
+      times = Math.abs(this.index - temp)
+      rate = rate * times
+      //传入移动的目标距离，比如，传入-500px,则整个imgs向左移动500px,正好一张图片的距离
+      Roll(-this.index * imgWidth)
+      //回复原来的移动速度
+      rate = 15
+    }
+  }
+
+  function Roll(distance) {
+    clearInterval(imgs.timer)
+    var speed = imgs.offsetLeft < distance ? rate : (0 - rate)
+    imgs.timer = setInterval(function () {
+      imgs.style.left = imgs.offsetLeft + speed + 'px'
+      var leave = distance - imgs.offsetLeft
+      if (Math.abs(leave) <= Math.abs(speed)) {
+        clearInterval(imgs.timer)
+        imgs.style.left = distance + "px"
+      }
+    }, 10)
+  }
+
+  //克隆第一张到最后一项，原因是克隆到最后一张时，再继续轮播时，这一张应该过渡完成，可是当过渡完成时，应该由第一张接应，所以需要将第一张克隆到最后一张的后面
+  imgs.appendChild(imgs.children[0].cloneNode(true))
+
+  function autoRun() {
+    imgActive++;
+    dotActive++;
+    console.log(imgActive)
+    if (imgActive > len) {
+      //letf=0,表示已经转一圈
+      imgs.style.left = 0
+      //所以从第二张开始轮播
+      imgActive = 1
+    }
+    if (dotActive > len - 1) {
+      dotActive = 0
+    }
+
+    for (let i = 0; i < len; i++) {
+      dotsChildren[i].className = "quiet"
+    }
+    dotsChildren[dotActive].className = "active"
+
+    Roll(-imgActive * imgWidth)
+
+  }
+
+  //开始轮播
+  timer = setInterval(autoRun, gapTime)
+  //放在wrapper上，停止轮播
+  wrapper.onmouseover = function () {
+    clearInterval(timer)
+    btns.style.display = 'block';
+  }
+  //移除鼠标，继续轮播
+  wrapper.onmouseout = function () {
+    timer = setInterval(autoRun, gapTime)
+    btns.style.display = 'none'
+  }
+
+  //上一张图片
+  btns.children[0].onclick = function () {
+    imgActive--;
+    dotActive--;
+    if (imgActive < 0) {
+      imgs.style.left = -len * imgWidth + 'px'
+      imgActive = dotActive = len - 1
+    }
+    Roll(-imgActive * imgWidth)
+    if (dotActive < 0) {
+      dotActive = len - 1
+    }
+    for (let i = 0; i < len; i++) {
+      dotsChildren[i].className = "quiet"
+    }
+    dotsChildren[dotActive].className = 'active'
+  }
+  //下一张图片直接调用autoRun 
+  btns.children[1].onclick = autoRun
+
+</script>
+
+</html>

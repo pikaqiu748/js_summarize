@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //function  和var变量相当于直接定义在window中
+    function test() {
+      console.log(111)
+    }
+    window.test()
+    console.log(window)
+    window.a = 'li'
+    function test02() {
+      console.log(this.a)
+    }
+    test02.call(window)
+    function test03(a) {
+      console.log(...arguments)
+      console.log(a)
+    }
+    //jiogriodshiooshio时候
+    test03(1, 2, 3)
+  </script>
+</body>
+
+</html>

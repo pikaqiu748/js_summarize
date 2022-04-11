@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    console.log(typeof [1,2,3])
+    const arrayProto = Array.prototype
+    console.log(arrayProto)
+    const arrayMethods = Object.create(arrayProto)
+    console.log(arrayMethods)
+    console.log(arrayProto['push'])
+
+    //arrayMethods.__proto__.push = function (val) {
+    //  console.log(val)
+    // }
+    //Array.prototype.push = function (val) {
+    //   console.log(val)
+    // }
+
+    //debugger
+    //console.log(arrayMethods.__proto__ === arrayProto)
+    //console.log(arrayMethods.unshift)
+    //Vue在observer数据阶段会判断如果是数组的话，则修改数组的原型，这样的话，后面对数组的任何操作都可以在劫持的过程中控制。
+    [
+      'push',
+      'pop',
+      'shift',
+      'unshift',
+      'splice'
+    ].forEach(function (method) {
+      const original = arrayProto[method]
+      def(arrayMethods, method, function mutator() {
+        let i = arguments.length
+        const args = new Array(i)
+        while (i--) {
+          args[i] = arguments[i]
+        }
+        const result = original.apply(this, args)
+        //const ob=this.__ob__
+        let inserted
+        switch (methods) {
+          case 'push':
+            inserted = args
+            break
+          case 'unshift':
+            inserted = args
+            break
+          case 'splice':
+            inserted = args.slice(2)
+            break
+        }
+        if (inserted) {
+          //ob.observeArray(inserted)
+          //ob.dep.notify()
+          return result
+        }
+      }, false)
+    })
+
+    function def(obj, key, val, enumerable) {
+      Object.defineProperty(obj, key, {
+        value: val,
+        enumerable: !!enumerable,
+        writable: true,
+        configurable: true
+      })
+    }
+    var fruits = ["Banana", "Orange", "Apple", "Mango"];
+    fruits.__proto__ = arrayMethods
+    console.log(fruits.push("Kiwi"))
+  </script>
+</body>
+
+</html>

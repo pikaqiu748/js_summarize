@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var obj = {
+      test: function () {
+        console.log(this); //true
+        f()   //没有人调用指向window
+        function f() {
+          console.log(this); //false
+        };
+      },
+      a: [1, 2, 3]
+    };
+    obj.test();
+    console.log(obj.test instanceof Object)
+    console.log(obj.a instanceof Object)
+    console.log(Array instanceof Object)
+  </script>
+</body>
+
+</html>

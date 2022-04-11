@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var name = '全局name';
+    var doSth = function () {
+      console.log(this.name);
+    }
+    var student = {
+      name: '若川',
+      doSth: doSth,
+      other: {
+        name: 'other',
+        doSth: doSth,
+      }
+    }
+    student.doSth(); // '若川'
+    student.other.doSth(); // 'other'
+    // 用call类比则为：
+    student.doSth.call(student);
+    // 用call类比则为：
+    student.other.doSth.call(student.other);
+
+    //会有以下场景，把对象中的函数赋值成一个变量了。 这样其实又变成普通函数了，所以使用普通函数的规则（默认绑定）。
+    var studentDoSth = student.doSth;
+    studentDoSth(); // 'window'
+    // 用call类比则为：
+    studentDoSth.call(undefined);
+
+
+    var obj = {
+      name: 'li',
+      fn: function () {
+        console.log(this.name)
+      }
+    }
+
+    var test = obj.fn
+    test()
+
+  </script>
+</body>
+
+</html>

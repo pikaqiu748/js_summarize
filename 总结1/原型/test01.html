@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function test01() {
+      console.log(this)
+      return () => {
+        console.log(this)
+      }
+    }
+    var test = {
+      fn: function hello() {
+        console.log('world')
+      }
+    }
+
+    let f = test.fn
+    f = function () {
+      console.log('hello')
+    }
+    f()
+    test.fn()
+  </script>
+
+
+  <style>
+    .d1 {
+      width: 0px;
+      height: 0px;
+      border-width: 30px 30px 80px 30px;
+      border-style: solid;
+      border-color: transparent transparent red transparent;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="d1">
+
+  </div>
+</body>
+
+</html>

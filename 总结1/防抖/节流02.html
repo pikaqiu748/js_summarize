@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="test">测试</button>
+  <script>
+    var btn = document.getElementById('test');
+    var flag = true;
+    btn.onclick = function () {
+      if (flag === true) {
+        setTimeout(() => {
+          console.log('click');
+          flag = true;
+        }, 1000)
+      }
+      flag = false;
+    }
+  </script>
+</body>
+
+</html>

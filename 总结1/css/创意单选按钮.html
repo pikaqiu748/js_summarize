@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: rgb(192, 155, 155);
+    }
+
+    .container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    div p {
+      color: #fff;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    div label {
+      position: relative;
+      margin: 5px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      font-size: 2em;
+      color: #fff;
+    }
+
+    label input {
+      /* display: none;*/
+    }
+
+    label span {
+      position: relative;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin-right: 15px;
+      transition: 0.5s;
+    }
+
+    label span::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #fff;
+      box-shadow: 0 -27px 0 #fff;
+      transition: 0.5s;
+    }
+
+    label span::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: #fff;
+      box-shadow: 27px 0 0 #fff;
+      transition: 0.5s;
+    }
+
+    label input:checked~span.check::before {
+      background: rgb(51, 255, 0);
+      /*如果offset-x或offset-y值为0，则阴影在元素背后，此时给blur-radius值或spread值可以产生阴影效果。*/
+      box-shadow: 0 0 0 transparent;
+    }
+
+    label input:checked~span.check::after {
+      height: 50%;
+      background: rgb(51, 255, 0);
+      box-shadow: 0 0 0 transparent;
+    }
+
+
+    label input:checked~span.cross::before {
+      background: red;
+      box-shadow: 0 0 0 transparent;
+      transform: rotate(-45deg) translate(10px, -10px);
+    }
+
+    label input:checked~span.cross::after {
+      background: red;
+      box-shadow: 0 0 0 transparent;
+      transform: rotate(-45deg) translate(10px, 10px);
+    }
+
+    label input:checked~span.check {
+      /*如果这个值为正值，元素相对原点中心顺时针旋转；如果这个值为负值，元素相对原点中心逆时针旋转。*/
+      transform: rotate(-45deg) translate(10px, -9px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <p>Are you Like This?</p>
+    <label for="yes">
+      <input type="radio" name='yesNo' id='yes'>
+      <span class="check"></span>
+      YES
+    </label>
+    <label for="no">
+      <input type="radio" name="yesNo" id='no'>
+      <span class="cross"></span>
+      No
+    </label>
+  </div>
+</body>
+
+</html>

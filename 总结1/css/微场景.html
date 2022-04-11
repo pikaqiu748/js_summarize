@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background: rgba(225, 229, 230, 0.479);
+      display: grid;
+      grid-template-rows: 10vh 1fr 10vh;
+    }
+
+    header {
+      background: rgb(229, 233, 7);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2em;
+      animation-name: header;
+      animation-duration: .5s;
+    }
+
+    main {
+      background: url('./images/3.jpg');
+      /*图片缩放cover,拉伸背景图像来完全覆盖内容区域*/
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-size: cover;
+      animation-name: rotate;
+      animation-delay: 1s;
+      animation-fill-mode: backwards;
+    }
+
+    main div {
+      width: 80vw;
+      border-radius: 10px;
+      padding: 10px;
+      color: white;
+      opacity: .8;
+      box-shadow: 0px 0 10px rgba(233, 7, 7, 0.8);
+    }
+
+    div:nth-child(1) {
+      transform: translateY(-50px);
+      background: rgb(130, 30, 160);
+    }
+
+    div:nth-child(2) {
+      background: rgb(29, 153, 56);
+
+    }
+
+    footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.3em;
+      color: aliceblue;
+      background: rgb(177, 165, 158);
+      animation-name: rotate;
+      animation-duration: .5s;
+      animation-delay: .5s;
+      /*transform: scale(0);
+      animation-fill-mode: forwards;*/
+      animation-fill-mode: backwards;
+    }
+
+    @keyframes header {
+      from {
+        transform: translateX(-100vw);
+      }
+
+      to {   
+        transform: translateX(100vw);
+      }
+    }
+
+    @keyframes rotate {
+      from {
+        transform: scale(0) rotate(360deg);
+      }
+
+      to {
+        transform: translateX(1) rotate(0deg);
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <header>xixix</header>
+  <main>
+    <div>可以设定背景图像的尺寸,该属性是css3中的,在移动端使用的地方很多,比如最常见的地方在做响应性布局的时候,比如之前做的项目中有轮播图片
+    </div>
+    <div>
+      background-size指定背景大小,以象素或百分比显示。
+    </div>
+  </main>
+  <footer>haahh</footer>
+</body>
+
+</html>

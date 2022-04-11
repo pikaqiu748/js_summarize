@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // var在全局作用域声明的变量有一种行为会挂载在window对象上，
+
+    var value1 = "张三"
+    let value2 = "李四"
+    const value3 = "王五"
+    c = 111
+    console.log(window.value1) // 张三    应该明确在哪里使用JavaScript，这种用法是错把Web环境的代码跑在了Node环境中。原因是：node端不存在window对象。
+    console.log(window.value2) // undefined
+    console.log(window.value3) // undefined
+    console.log(window.c)//11
+    console.log(window)
+  </script>
+</body>
+
+</html>

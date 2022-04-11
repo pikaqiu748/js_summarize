@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+  <style>
+    .box {
+      position: sticky;
+      width: 200px;
+      height: 200px;
+      border: 1px solid #0000FF;
+      top: 2px;
+    }
+
+    /*为什么有的时候设定的 sticky 会失效：
+
+须指定 top, right, bottom 或 left 四个阈值其中之一（且达到设定的阈值），才可使粘性定位生效。否则其行为与相对定位相同；
+并且 top 和 bottom 同时设置时，top 生效的优先级高，left 和 right 同时设置时，left 的优先级高
+设定为 position: sticky 的元素的任意父节点的 overflow 属性必须是 visible，否则 position:sticky 不会生效；在满足上述情况下，设定了 position: sticky 的元素的父容器的高度必须大于当前元素，否则也会失效。（当然，此时，sticky 吸附的基准元素就会变成父元素）
+如果 position: sticky 元素的任意父节点定位设置为 position: overflow，则父容器无法进行滚动，所以 position:sticky 元素也不会有滚动然后固定的情况
+在满足上述情况下，设定了 position: sticky 的元素的父容器的高度必须大于当前元素，否则也会失效。（当然，此时，sticky 吸附的基准元素就会变成父元素）*/
+    .wrap {
+      height: 3000px;
+      background-color: rgb(19, 190, 139);
+    }
+
+    .box_out {
+      width: 400px;
+      height: 400px;
+      border: 1px solid #0000FF;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="box_out">
+      <div class="box"></div>
+    </div>
+  </div>
+</body>
+
+</html>

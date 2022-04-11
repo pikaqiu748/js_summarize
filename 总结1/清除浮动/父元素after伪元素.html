@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .div1 {
+      background: pink;
+    }
+
+    /*clear属性只是在block元素是起作用，如果你把clear:both用在一个inline-block或inline元素上，clear:both是不会起任何作用的。*/
+    .clearfix:after {
+      content: '';
+      height: 0;
+      display: block;
+      clear: both;
+    }
+
+    .div2 {
+      width: 100px;
+      height: 100px;
+      background: green;
+      float: left;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="div1 clearfix">
+    <div class="div2"></div>
+  </div>
+</body>
+
+</html>

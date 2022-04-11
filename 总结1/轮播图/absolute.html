@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>位移滑动轮播图1</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #wrapper {
+      position: relative;
+      margin: 50px auto;
+      padding: 0;
+      width: 500px;
+      height: 300px;
+    }
+
+    #wrapper .content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #wrapper>.content>.imgs {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      left: 0;
+      top: 0;
+      width: 2500px;
+      /*多留出一张图片的宽度！*/
+      list-style: none;
+    }
+
+    #wrapper>.content>.imgs li {
+      float: left;
+      margin: 0;
+      padding: 0;
+      width: 500px;
+      height: 300px;
+    }
+
+    #wrapper>.content>.imgs>li img {
+      width: 100%;
+      height: 100%;
+    }
+
+    #wrapper>.content>.dots {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      list-style: none;
+    }
+
+    #wrapper>.content>.dots li {
+      float: left;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
+      border-radius: 50%;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    li.active {
+      background-color: white;
+    }
+
+    li.quiet {
+      background-color: #5a5a58;
+    }
+
+    .btns {
+      display: none;
+    }
+
+    .btns span {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      top: 50%;
+      margin-top: -20px;
+      line-height: 40px;
+      text-align: center;
+      font-weight: bold;
+      font-family: Simsun;
+      font-size: 30px;
+      border: 1px solid #fff;
+      opacity: 0.5;
+      cursor: pointer;
+      color: #fff;
+      background: black;
+    }
+
+    .btns .left {
+      left: 5px;
+    }
+
+    .btns .right {
+      left: 100%;
+      margin-left: -45px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <body>
+    <div id="wrapper">
+      <div class="content">
+        <ul class="imgs">
+          <li><img src="images/1.jpg" /></li>
+          <li><img src="images/2.jpg" /></li>
+          <li><img src="images/3.jpg" /></li>
+          <li><img src="images/4.jpg" /></li>
+        </ul>
+        <ul class='dots'></ul>
+      </div>
+      <div class="btns">
+        <span class="left">&lt;</span>
+        <span class="right">&gt;</span>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    var wrapper = document.getElementById("wrapper");
+    var imgs = document.getElementsByClassName("imgs")[0];
+    //console.log(document.getElementsByClassName("imgs"))
+    var dots = document.getElementsByClassName("dots")[0];
+    var btns = document.getElementsByClassName("btns")[0];
+    var dotss = dots.children;
+
+    var len = imgs.children.length;  //图片张数
+    //offsetWidth 水平方向 width + 左右padding + 左右border-width
+    var width = wrapper.offsetWidth; //每张图片的宽度
+    //console.log(width)
+    //console.log(width)
+    var rate = 15;    //一张图片的切换速度， 单位为px
+    var times = 1;    //切换速度的倍率
+    var gap = 2000;   //自动切换间隙， 单位为毫秒
+    var timer = null; //初始化一个定时器
+    var imgSub = 0;   //当前显示的图片下标
+    var dotSub = 0;   //当前显示图片的小圆点下标
+    var temp;
+
+
+    // 创建一个文档片段，此时还没有插入到 DOM 结构中
+    const frag = document.createDocumentFragment()
+    // 根据图片数量添加相应的小圆点到文档片段中
+    for (let i = 0; i < len; i++) {
+      const dot = document.createElement("li");
+      dot.className = 'quiet';
+      // 先插入文档片段中
+      frag.appendChild(dot);
+    }
+    // 将小圆点片段统一插入到 DOM 结构中
+    dots.appendChild(frag)
+    //console.log(dots.children)
+    // 第一个小圆点高亮显示
+    dots.children[0].className = "active";
+
+    // 滑动函数
+    function Roll(distance) {        //参数distance：滚动的目标点（必为图片宽度的倍数）
+      clearInterval(imgs.timer);  //每次运行该函数必须清除之前的定时器！
+      //判断图片移动的方向
+      // console.log(imgs.offsetLeft) 初始為0
+      // console.log(distance) 初始为-500
+      //rate=15
+      // console.log(imgs.offsetLeft) 初始值为0
+      var speed = imgs.offsetLeft < distance ? rate : (0 - rate);
+      //设置定时器，每隔10毫秒，调用一次该匿名函数
+      imgs.timer = setInterval(function () {
+        //每一次调用滚动到的地方 (速度为 speed px/10 ms)         
+        imgs.style.left = imgs.offsetLeft + speed + "px";
+        //距目标点剩余的px值      
+        var leave = distance - imgs.offsetLeft;
+        // console.log(leave)
+        /*接近目标点时的处理，滚动接近目标时直接到达， 避免rate值设置不当时不能完整显示图片*/
+        if (Math.abs(leave) <= Math.abs(speed)) {
+          clearInterval(imgs.timer);
+          imgs.style.left = distance + "px";
+        }
+      }, 10);
+    }
+
+    /*克隆第一个li到列表末*/
+    imgs.appendChild(imgs.children[0].cloneNode(true));
+
+    function autoRun() {
+      //当前显示的图片下标
+      imgSub++;
+      //当前显示图片的小圆点下标
+      dotSub++;
+      if (imgSub > len) {          //滚动完克隆项后
+        imgs.style.left = 0;   //改变left至真正的第一项处
+        imgSub = 1;            //从第二张开始显示
+      }
+      // 调用滚动函数，参数为该下标的滚动距离，每次移动一张
+      Roll(-imgSub * width);
+
+      // 如果圆点下标已滚动到最后，则将下标重置为0
+      if (dotSub > len - 1) {                //判断是否到了最后一个圆点
+        dotSub = 0;
+      }
+      // 循环修改所有圆点默认样式
+      for (var i = 0; i < len; i++) {
+        dotss[i].className = "quiet";
+      }
+      // 给当前滚动到的圆点添加高亮样式
+      dotss[dotSub].className = "active";
+    }
+
+    // 创建定时器，开始自动滚动,gap切换时间
+    timer = setInterval(autoRun, gap);
+
+    // 循环添加小圆点的触发事件
+    for (var i = 0; i < len; i++) {
+      dotss[i].index = i;
+      dotss[i].onmouseover = function () {
+        for (var j = 0; j < len; j++) {
+          dotss[j].className = "quiet";
+        }
+        this.className = "active";
+        temp = dotSub;
+        imgSub = dotSub = this.index;
+        times = Math.abs(this.index - temp);  //距离上个小圆点的距离
+        rate = rate * times;                    //根据距离改变切换速率
+        Roll(-this.index * width);
+        rate = 15;
+      }
+    }
+
+    // 添加事件：鼠标移动到wrapper上，左右切换按钮显示
+    wrapper.onmouseover = function () {
+      clearInterval(timer);
+      btns.style.display = 'block';
+    }
+    // 添加事件：鼠标移出wrapper，左右切换按钮隐藏
+    wrapper.onmouseout = function () {
+      timer = setInterval(autoRun, gap);
+      btns.style.display = 'none';
+    }
+
+
+
+    // 点击上一张按钮 触发事件
+    btns.children[0].onclick = function () {
+      imgSub--;
+      dotSub--;
+      if (imgSub < 0) {                               //滚动完第一项后
+        imgs.style.left = -len * width + "px";  //改变left至克隆的第一项处
+        imgSub = dotSub = len - 1;
+      }
+      Roll(-imgSub * width);
+
+      if (dotSub < 0) {
+        dotSub = len - 1;
+      }
+      for (var i = 0; i < len; i++) {
+        dotss[i].className = "quiet";
+      }
+      dotss[dotSub].className = "active";
+    }
+    // 点击下一张按钮 触发事件
+    btns.children[1].onclick = autoRun;
+  </script>
+</body>
+
+</html>

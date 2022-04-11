@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<style>
+  .border {
+    border: 2px solid;
+
+  }
+
+  .clear {
+    clear: both;
+  }
+
+  .common-div {
+    width: 160px;
+    height: 50px;
+    background-color: rgb(77, 59, 59);
+    float: left;
+
+  }
+
+  .float-red {
+    width: 100px;
+    height: 50px;
+    background-color: rgb(243, 12, 12);
+    float: left;
+
+  }
+
+
+  .clearfix:after {
+    content: "";
+    /*内容设置为空！！！*/
+    display: block;
+    /*显示为块级元素！！！*/
+    height: 0;
+    visibility: hidden;
+    clear: both;
+  }
+
+  .float-blue {
+    width: 100px;
+    height: 50px;
+    background-color: #09c;
+    float: left;
+
+  }
+</style>
+
+<body>
+  <div class="border clearfix">
+    <div class="float-red"></div>
+    <div class="common-div"></div>
+    <div class="float-blue"></div>
+    <!-- <div class="clear"></div> -->
+  </div>
+</body>
+
+</html>

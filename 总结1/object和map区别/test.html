@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Map</title>
+</head>
+
+<body>
+  <div id="cont">
+
+  </div>
+</body>
+
+</html>
+<script>
+  let cont = document.getElementById('cont')
+  let m = new Map()
+  m.set(cont, 'hello,world')//dom对象作为键
+  m.set(['username'], 'jack')//数组作为键
+  m.set(true, 1)//boolean类型作为键
+  //可以迭代,把每一对键值对迭代成一个对象
+  for (let val of m) {
+    console.log(val)
+    console.log(val[0])//key
+    console.log(val[1])//value
+
+  }
+</script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background: blanchedalmond;
+    }
+
+    #demo1 {
+      /* 居中显示 */
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      /* 初始样式 */
+      width: 10em;
+      height: 10em;
+      /* 背景色*/
+      background-color: #fff;
+      /* 边距设置 */
+      border: 1em solid grey;
+      border-radius: 8%;
+      /*设置该盒子里面的子元素方式*/
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* 过渡设置 */
+      transition: all 2s ease-in-out;
+    }
+
+    #demo1:hover {
+      border-radius: 50%;
+    }
+
+    #demo1 span {
+      color: #000;
+      font-weight: bold;
+      font-size: 2em;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="demo1">
+    <span>A</span>
+  </div>
+</body>
+
+</html>

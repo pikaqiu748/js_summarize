@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var name = '全局'
+    var obj = {
+      name: 'li',
+      fn: function () {
+        console.log(this)
+        return () => {
+          console.log(this.name)
+        }
+      }
+    }
+
+    obj.fn()()  //li
+    var test = obj.fn()
+    test()
+
+    //先赋值给一个变量,在执行变成默认绑定形式
+    var test2 = obj.fn
+    test2()
+    test2()()
+  </script>
+</body>
+
+</html>

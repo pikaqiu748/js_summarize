@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background: rgb(92, 84, 84);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    main {
+      width: 100px;
+      height: 100px;
+      background: #fff;
+      animation-name: hd;
+      animation-duration: 2s;
+    }
+
+    @keyframes hd {
+      0% {
+        background: white;
+      }
+
+      25% {
+        transform: scale(2);
+        background: rgb(192, 255, 203);
+      }
+
+      65% {
+        transform: scale(1);
+      }
+
+      100% {
+        background: red;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main></main>
+</body>
+
+</html>

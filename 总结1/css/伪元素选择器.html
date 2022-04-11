@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    span::before {
+      content: '&lgt';
+      color: red;
+    }
+
+    span::after {
+      content: '&lgt';
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <span id='s1'>sdnsjd</span>
+  </div>
+  <div>
+    <script>
+      var sp = document.getElementById('s1')
+      var newNode = document.createElement('div')
+      var s = document.getElementsByTagName("script")[0]
+      console.log(s.parentNode)
+      s.parentNode.insertBefore(newNode, s)
+    </script>
+  </div>
+
+</body>
+
+</html>

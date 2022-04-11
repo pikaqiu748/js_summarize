@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <ul id="target">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+  </div>
+
+  <script>
+    //append() 可以同时传入多个节点或字符串，没有返回值
+    //只能传一个节点，且不直接支持传字符串【需要 appendChild(document.createTextElement('字符串'))代替】，返回追加的 Node 节点；
+    var target = document.getElementById("target");
+    var liList = document.getElementsByTagName("li");
+    var docu = document.createDocumentFragment();
+    for (let i = liList.length - 1; i >= 0; --i) {
+      //添加的是纯字符串，不能获取内部元素的属性；
+      liList[i].innerHTML = 'haha'
+      docu.appendChild(liList[i])
+    }
+    target.appendChild(docu)
+  </script>
+</body>
+
+</html>

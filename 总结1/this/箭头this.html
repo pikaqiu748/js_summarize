@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var obj = {
+      hi: function () {
+        console.log(this);
+        return () => {
+          console.log(this);
+        }
+      },
+      sayHi: function () {
+        return function () {
+          console.log(this);
+          return () => {
+            console.log(this);
+          }
+        }
+      },
+      say: () => {
+        console.log(this);
+      }
+    }
+    let hi = obj.hi(); //输出obj对象
+    hi(); //输出obj对象
+    let sayHi = obj.sayHi();
+    let fun1 = sayHi(); //输出window
+    fun1(); //输出window
+    obj.say(); //输出window
+    console.log('obj2  ----------------------------------------')
+
+
+    var obj2 = {
+      fn: (() => {
+        console.log(this)
+      })(),
+      fn1: (function () {
+        console.log(this)
+      })(),
+    }
+
+    var obj3 = {
+      test01: function () {
+        console.log(this)
+      },
+      test02: () => {
+        console.log(this)
+      }
+    }
+
+    obj2.fn  //箭头函数的this指向上一层，obj中没有this,所以继续网上找，找到全局中的this，即window
+    obj2.fn1     //相当于直接执行，并不是由obj调用的
+    console.log('obj3  -------------------')
+    obj3.test01()
+    obj3.test01.call(undefined)
+    obj3.test02.call(obj3)  //箭头函数中的this是函数外最近的那个this，因此，apply、call方法其实并不会起作用。
+  </script>
+</body>
+
+</html>

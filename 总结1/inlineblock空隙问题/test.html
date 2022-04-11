@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>display:inline-block元素之间空隙的产生原因和解决办法</title>
+  <style type="text/css">
+    /* .parent {
+      font-size: 0;
+    }*/
+
+    .parent .child {
+      display: inline-block;
+      background-color: #fdfd04;
+      width: 100px;
+      height: 100px;
+      font-size: 10px;
+      /* float: left;  第二种方式}*/
+  </style>
+</head>
+
+<body>
+  <div class="parent">
+    <div class="child">child1</div>
+    <div class="child">child2</div>
+  </div>
+</body>
+
+</html>

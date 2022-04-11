@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <span>dwd</span>
+  <div>
+    dwedfc
+  </div>
+  <script>
+    function deepLogTagNames (parentNode) {
+      console.log(parentNode)
+      console.log(parentNode[0].tagName);
+      const childNodes = parentNode[0].childNodes;
+      //过滤没有tagName的节点，遍历输出
+      Array.prototype.filter.call(childNodes, item => item.tagName).forEach(itemNode => {
+        console.log(itemNode)
+        deepLogTagNames(itemNode);
+      })
+    }
+    deepLogTagNames(document.getElementsByTagName("body"))
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const obj = {
+      name: "陌上寒",
+      sex: "male"
+    }
+
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        console.log(`${key}: ${obj[key]}`)
+      }
+      else
+        console.log(key);
+    }
+
+  </script>
+</body>
+
+</html>

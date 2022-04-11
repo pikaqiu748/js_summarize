@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>CSS实现三栏布局——float</title>
+  <style type="text/css">
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      overflow: auto;
+    }
+
+    .left {
+      width: 200px;
+      height: 200px;
+      background: red;
+
+      float: left;
+    }
+
+    .middle {
+      height: 200px;
+      background: yellow;
+    }
+
+    .right {
+      width: 200px;
+      height: 200px;
+      background: blue;
+
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- 这里要注意顺序，必须把浮动放前面 -->
+    <div class="left">左栏</div>
+    <div class="right">右栏</div>
+    <div class="middle">中间栏</div>
+  </div>
+</body>
+
+</html>
