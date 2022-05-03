@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var eleImage = document.getElementById('img')
+      var storage = {
+        arrDom: [eleImage, eleImage.outerHTML],
+      }
+      eleImage.remove()
+      eleImage = null
+      //此时，eleImage这个DOM对象其实还在内存中。因为 eleImage 被 storage.arrDom 引用了，即使eleImage设为null也无法将内存彻底释放。
+      //此时，要想完全把图像的内存释放，还需要执行这行： storage.arrDom[0] = null;
+
+      //但是，纯靠技术手段，人工识别哪些地方的内存要释放，实在是太累了。就算懂行的人有时候嫌麻烦，都懒得去管理，那有没有什么手段，我只要变量设为null，所有有引用的地方的内存都自动释放呢？
+      //这就可以考虑使用WeakMap了。
+
+      //var eleImage = document.getElementById('img');
+      //var storeMap = new WeakMap();
+      //storeMap.set(eleImage, eleImage.outerHTML);
+      //eleImage.remove();
+      //eleImage = null;
+
+      //对于weakmap
+      //key只能是对象，不能是原始数据类型（字符串、数字、true或false，null，undefined，symbol等类型）
+      //WeakMap中的键是无法枚举的
+      //不同于Map对象，Map对象是可以枚举的，有keys()、values()、entries()方法，还可以使用forEach遍历。
+      //但是WeakMap无法枚举，WeakMap的这个特性也可以用来模拟私有属性。
+    </script>
+  </body>
+</html>
