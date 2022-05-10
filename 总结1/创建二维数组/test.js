@@ -1,7 +1,7 @@
 console.log(Array.from(Array(3), () => Array(3)))
 console.log(Array(3).fill().map(() => Array(3)))
 
-console.log(Array(3).fill().map(() => Array(3).fill().map(() => Array(3))))   //三维数组
+console.log(Array(3).fill().map(() => Array(3).fill().map(() => Array(3))))   //数组
 // 还有一种for双重循环
 
 

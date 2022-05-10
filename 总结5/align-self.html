@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      main {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        border: 1px solid red;
+        justify-content: center;
+        align-items: center;
+      }
+      .box1 {
+        width: 50px;
+        height: 50px;
+        border: 1px solid green;
+        /*父元素设置了所有的元素为垂直居中*/
+        /*现在通过align-self单独设置自身的位置*/
+        align-self: flex-start;
+      }
+      .box2 {
+        width: 30px;
+        height: 30px;
+        border: 1px solid green;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="box1"></div>
+      <div class="box2"></div>
+    </main>
+  </body>
+</html>

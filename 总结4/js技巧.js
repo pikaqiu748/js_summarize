@@ -1,5 +1,7 @@
 console.log(+'345')
 console.log(+'345.78')
+console.log(parseFloat('234'))
+console.log(parseInt('23.43'))
 // -----------------------------
 function test01 () {
   console.log('test01')
