@@ -9,8 +9,8 @@ function getAdd () {
     return args_arr.reduce((sum, prev) => sum + prev, 0)
   }
   return closure;
-}
+} 
 
-
+ 
 let add = getAdd();
 console.log(add(1,2,3)(1,2)())

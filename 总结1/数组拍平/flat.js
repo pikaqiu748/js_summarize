@@ -14,3 +14,6 @@ function flatten (arr) {
 }
 
 console.log(flatten(arr))
+
+
+// console.log([arr.toString()])

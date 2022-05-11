@@ -9,4 +9,4 @@ if (1) {
 foo(); // 2
 
 console.log(b); // 2
-console.log(3)  //3
+console.log(c)  //3

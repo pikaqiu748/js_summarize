@@ -21,7 +21,7 @@ const check01 = (firstName, lastName) => {
 
   console.log(firstName)
 
-  console.log(lastName
+  console.log(lastName)
 
   // 下面的复制覆盖掉firstName
   firstName = "chen";

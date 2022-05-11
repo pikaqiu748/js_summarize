@@ -21,6 +21,6 @@ String.prototype.myIndexOf = function (data) {
   return -1;
 }
 
-console.log('asdasde'.myIndexOf('e'))
+console.log('asdasde'.myIndexOf('da'))
 
 console.log('asdasde'.charAt(6))
